@@ -53,6 +53,16 @@ npm run deploy           # Worker → automation-demos.<subdomain>.workers.dev
 npm run deploy:site      # Pages project vondemo
 ```
 
+Deploy pitfalls (found 2026-10-18):
+
+- **Never run `wrangler pages project create` from a coding agent.** Wrangler 4.15x detects agents and, when the
+  Pages project does not exist yet, delegates to Workers: it deploys whatever `wrangler.jsonc` sits in the folder
+  (here: the API Worker, cron included) as a new Worker on `workers.dev`, and no `pages.dev` project is made.
+  Create a Pages project in the dashboard or with the API (`POST /accounts/{id}/pages/projects`). Once it exists,
+  `wrangler pages deploy` goes to Pages normally.
+- A new cron trigger took about 10 minutes to fire for the first time (Cloudflare says up to 15).
+  `last_cron_tick` in `/api/health` shows when it starts.
+
 ### Configuration (names only, never values)
 
 Public settings live in `wrangler.jsonc` under `vars`. Secrets are set on the Worker with `wrangler secret put`,
