@@ -1,0 +1,3 @@
+#!/bin/sh
+# Secret scan of the whole history before anything leaves this machine.
+exec gitleaks git --redact --exit-code 1 .

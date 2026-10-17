@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- TEMPLATE: copy this folder to /case-studies/<slug>/, then replace every [bracketed] line,
+       the data-demo value, the video id and the diagram labels. Keep the section order. -->
+  <title>Case-Study Template | Von Castro Automation Demos</title>
+  <meta name="description" content="The layout every case study on this site follows: outcome first, the problem, a video and live demo, how it works, reliability, platform builds, decisions and links.">
+  <link rel="canonical" href="https://vondemo.pages.dev/case-studies/template/">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f7f7f4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#141311" media="(prefers-color-scheme: dark)">
+  <meta name="demo-api" content="https://automation-demos.vonc.workers.dev">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Case-Study Template | Von Castro">
+  <meta property="og:description" content="Outcome first, then the problem, the video, how it works and how it fails safely.">
+  <meta property="og:url" content="https://vondemo.pages.dev/case-studies/template/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+  <link rel="stylesheet" href="/assets/datasheet.css">
+  <script src="/assets/theme-init.js"></script>
+  <script src="/assets/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<div class="container">
+
+  <header class="masthead">
+    <div class="doc-meta">
+      <span><a href="/"><strong>Demos</strong></a> / Case study</span>
+      <span><strong>Ref.</strong> D-00</span>
+      <span><strong>Rev.</strong> 2026.10.18</span>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Theme</button>
+    </div>
+    <div class="masthead-main">
+      <div class="kicker">Case study · Template</div>
+      <h1 class="doc-title">Project name,<br><em>one-line promise.</em></h1>
+      <div class="doc-subtitle">
+        <span>[Who it is for]</span>
+        <span>[Stack in three words]</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="doc-body">
+    <aside class="doc-aside" aria-label="Page index">
+      <div class="index-title">Index</div>
+      <ul class="index-list">
+        <li><a href="#outcome" data-num="01">Outcome</a></li>
+        <li><a href="#problem" data-num="02">The problem</a></li>
+        <li><a href="#watch" data-num="03">Watch · try it</a></li>
+        <li><a href="#how" data-num="04">How it works</a></li>
+        <li><a href="#reliability" data-num="05">Reliability</a></li>
+        <li><a href="#platforms" data-num="06">Your platform</a></li>
+        <li><a href="#decisions" data-num="07">Tech + decisions</a></li>
+        <li><a href="#links" data-num="08">Links</a></li>
+      </ul>
+    </aside>
+
+    <main class="doc-main" id="main">
+
+      <!-- 1. OUTCOME FIRST: one sentence on the business result + 2-3 live numbers from `runs`. -->
+      <section class="section" id="outcome" aria-labelledby="outcome-title" data-ops-feed data-demo="speed-to-lead" data-limit="5"
+               data-empty="No runs of this demo yet. Try it live below and yours appears here.">
+        <div class="section-header">
+          <div class="section-num">§ 01</div>
+          <div>
+            <h2 class="section-title" id="outcome-title">Outcome.</h2>
+            <div class="section-desc">Live numbers from the run log</div>
+          </div>
+        </div>
+        <p class="lede"><strong>[One sentence on the business result.]</strong> For example: every website lead gets a personal reply in under a minute, day or night.</p>
+        <div class="params three gap-32" aria-label="Live numbers for this demo">
+          <div class="param"><div class="param-key">Median reply</div><div class="param-val" data-stat="median">–</div><div class="param-unit">last 7 days</div></div>
+          <div class="param"><div class="param-key">Runs · 24 h</div><div class="param-val" data-stat="runs_24h">–</div><div class="param-unit">this demo</div></div>
+          <div class="param"><div class="param-key">Success · 7 d</div><div class="param-val" data-stat="success_rate_7d">–</div><div class="param-unit">finished runs</div></div>
+        </div>
+        <div class="feed-head">
+          <h3 class="label" id="outcome-feed">Latest runs</h3>
+          <span class="feed-status" data-feed-status data-state="idle" role="status"><span class="dot" aria-hidden="true"></span><span data-feed-status-text>Connecting…</span></span>
+        </div>
+        <ol class="feed" data-feed-list aria-labelledby="outcome-feed"><li class="empty">Loading the run log…</li></ol>
+      </section>
+
+      <!-- 2. THE PROBLEM: who has it and what it costs them, in plain words. -->
+      <section class="section" id="problem" aria-labelledby="problem-title">
+        <div class="section-header">
+          <div class="section-num">§ 02</div>
+          <div>
+            <h2 class="section-title" id="problem-title">The problem.</h2>
+            <div class="section-desc">Who has it · what it costs</div>
+          </div>
+        </div>
+        <p class="body-text">[Who has this problem, in one or two sentences. Name the person, not the industry.]</p>
+        <p class="body-text">[What it costs them today: lost leads, hours, missed payments. Use one real number if there is one.]</p>
+        <p class="body-text">[What they do now instead, and why that breaks.]</p>
+      </section>
+
+      <!-- 3. WATCH IT (first frame shows the result) and TRY IT LIVE. -->
+      <section class="section" id="watch" aria-labelledby="watch-title">
+        <div class="section-header">
+          <div class="section-num">§ 03</div>
+          <div>
+            <h2 class="section-title" id="watch-title">Watch it. Try it.</h2>
+            <div class="section-desc">90 seconds · then run it yourself</div>
+          </div>
+        </div>
+        <figure class="figure">
+          <span class="figlabel">Fig. 1 · Demo video</span>
+          <!-- Set data-youtube to the 11-character video id. The player loads only on click. -->
+          <div class="video" data-youtube="" data-title="[Project] demo video">
+            <button type="button" class="video-play" aria-label="Play the demo video"><span>Play · 1:30</span></button>
+            <p class="video-pending">Video coming with the demo</p>
+          </div>
+          <figcaption>[One line: what the video shows, result first.]</figcaption>
+        </figure>
+        <div class="actions gap-28">
+          <span class="cta" aria-disabled="true">Try it live · opens with the demo</span>
+        </div>
+        <p class="note">Try it with your own email. You get the real messages. Your details are deleted after 7 days.</p>
+      </section>
+
+      <!-- 4. HOW IT WORKS: one clean SVG flow (trigger → steps → outputs), light and dark. -->
+      <section class="section" id="how" aria-labelledby="how-title">
+        <div class="section-header">
+          <div class="section-num">§ 04</div>
+          <div>
+            <h2 class="section-title" id="how-title">How it works.</h2>
+            <div class="section-desc">Trigger → steps → outputs</div>
+          </div>
+        </div>
+        <figure class="figure">
+          <span class="figlabel">Fig. 2 · Flow</span>
+          <div class="flow">
+            <svg class="flow-h" viewBox="0 0 960 130" role="img" aria-labelledby="flow-h-title">
+              <title id="flow-h-title">Flow: a form submit is validated, scored by AI, saved, and answered by email with an owner alert.</title>
+              <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path class="arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+              <g class="node trigger"><rect x="1" y="20" width="160" height="90" rx="2"/><text class="k" x="16" y="52">TRIGGER</text><text x="16" y="90">Form submit</text></g>
+              <path class="edge" d="M161,65 H199" marker-end="url(#ah)"/>
+              <g class="node"><rect x="200" y="20" width="160" height="90" rx="2"/><text class="k" x="215" y="52">STEP 1</text><text x="215" y="90">Validate</text></g>
+              <path class="edge" d="M360,65 H399" marker-end="url(#ah)"/>
+              <g class="node"><rect x="400" y="20" width="160" height="90" rx="2"/><text class="k" x="415" y="52">STEP 2</text><text x="415" y="90">AI score</text></g>
+              <path class="edge" d="M560,65 H599" marker-end="url(#ah)"/>
+              <g class="node"><rect x="600" y="20" width="160" height="90" rx="2"/><text class="k" x="615" y="52">STEP 3</text><text x="615" y="90">Save to D1</text></g>
+              <path class="edge" d="M760,65 H798" marker-end="url(#ah)"/>
+              <g class="node output"><rect x="799" y="20" width="160" height="90" rx="2"/><text class="k" x="814" y="52">OUTPUT</text><text x="814" y="90">Email + alert</text></g>
+            </svg>
+            <svg class="flow-v" viewBox="0 0 320 500" role="img" aria-labelledby="flow-v-title">
+              <title id="flow-v-title">Flow: a form submit is validated, scored by AI, saved, and answered by email with an owner alert.</title>
+              <defs><marker id="av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path class="arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+              <g class="node trigger"><rect x="30" y="1" width="260" height="70" rx="2"/><text class="k" x="48" y="28">TRIGGER</text><text x="48" y="54">Form submit</text></g>
+              <path class="edge" d="M160,71 V106" marker-end="url(#av)"/>
+              <g class="node"><rect x="30" y="107" width="260" height="70" rx="2"/><text class="k" x="48" y="134">STEP 1</text><text x="48" y="160">Validate</text></g>
+              <path class="edge" d="M160,177 V212" marker-end="url(#av)"/>
+              <g class="node"><rect x="30" y="213" width="260" height="70" rx="2"/><text class="k" x="48" y="240">STEP 2</text><text x="48" y="266">AI score</text></g>
+              <path class="edge" d="M160,283 V318" marker-end="url(#av)"/>
+              <g class="node"><rect x="30" y="319" width="260" height="70" rx="2"/><text class="k" x="48" y="346">STEP 3</text><text x="48" y="372">Save to D1</text></g>
+              <path class="edge" d="M160,389 V424" marker-end="url(#av)"/>
+              <g class="node output"><rect x="30" y="425" width="260" height="70" rx="2"/><text class="k" x="48" y="452">OUTPUT</text><text x="48" y="478">Email + alert</text></g>
+            </svg>
+          </div>
+          <figcaption>[Replace the node labels with the demo's real steps. Keep labels to two or three words.]</figcaption>
+        </figure>
+        <p class="body-text gap-24">[Two or three sentences walking through the flow. Name the trigger, the decision the AI makes, and what the customer gets.]</p>
+      </section>
+
+      <!-- 5. RELIABILITY: what can fail and how it is handled. -->
+      <section class="section" id="reliability" aria-labelledby="reliability-title">
+        <div class="section-header">
+          <div class="section-num">§ 05</div>
+          <div>
+            <h2 class="section-title" id="reliability-title">Reliability.</h2>
+            <div class="section-desc">What can fail · what happens then</div>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <caption class="sr-only">Failure modes and how each is handled</caption>
+            <thead><tr><th scope="col">If this fails</th><th scope="col">What happens</th></tr></thead>
+            <tbody>
+              <tr><td>The AI gives a bad answer</td><td>The answer is checked against a schema. One retry, then a second model takes over. The run log shows which model answered.</td></tr>
+              <tr><td>Gmail or Calendar is down</td><td>The step goes to the dead-letter list and retries after 5&nbsp;min, 30&nbsp;min and 2&nbsp;h. Every failure sends me a Telegram alert.</td></tr>
+              <tr><td>Someone floods the form</td><td>Turnstile blocks bots. Each visitor gets 3 runs a day. Past the daily email cap, the email shows on the page instead.</td></tr>
+              <tr><td>Visitor data piles up</td><td>A nightly job deletes visitor details and demo calendar events after 7&nbsp;days.</td></tr>
+              <tr><td>[A failure specific to this demo]</td><td>[How it is handled.]</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 6. BUILD IT ON YOUR PLATFORM: n8n / Make / GHL / Zapier tabs with screenshots and import files. -->
+      <section class="section" id="platforms" aria-labelledby="platforms-title">
+        <div class="section-header">
+          <div class="section-num">§ 06</div>
+          <div>
+            <h2 class="section-title" id="platforms-title">Build it on your platform.</h2>
+            <div class="section-desc">Same flow · four tools · import files included</div>
+          </div>
+        </div>
+        <div class="tablist" role="tablist" aria-label="Platform">
+          <button type="button" class="tab" role="tab" id="tab-n8n" aria-controls="panel-n8n" aria-selected="true">n8n</button>
+          <button type="button" class="tab" role="tab" id="tab-make" aria-controls="panel-make" aria-selected="false" tabindex="-1">Make</button>
+          <button type="button" class="tab" role="tab" id="tab-ghl" aria-controls="panel-ghl" aria-selected="false" tabindex="-1">GoHighLevel</button>
+          <button type="button" class="tab" role="tab" id="tab-zapier" aria-controls="panel-zapier" aria-selected="false" tabindex="-1">Zapier</button>
+        </div>
+        <div class="tabpanel" role="tabpanel" id="panel-n8n" aria-labelledby="tab-n8n" tabindex="0">
+          <div class="grid-2">
+            <div class="placeholder-shot">[Screenshot of the n8n workflow, with alt text]</div>
+            <div><p class="body-text">[What the n8n version does the same, and what differs.]</p><p class="note">Import file: templates/n8n.json in the repo.</p></div>
+          </div>
+        </div>
+        <div class="tabpanel" role="tabpanel" id="panel-make" aria-labelledby="tab-make" tabindex="0" hidden>
+          <div class="grid-2">
+            <div class="placeholder-shot">[Screenshot of the Make scenario]</div>
+            <div><p class="body-text">[Notes for the Make version.]</p><p class="note">Blueprint: templates/make-blueprint.json.</p></div>
+          </div>
+        </div>
+        <div class="tabpanel" role="tabpanel" id="panel-ghl" aria-labelledby="tab-ghl" tabindex="0" hidden>
+          <div class="grid-2">
+            <div class="placeholder-shot">[Screenshot of the GHL workflow]</div>
+            <div><p class="body-text">[The inbound webhook and the field map.]</p><p class="note">Field map: templates/ghl-field-map.md.</p></div>
+          </div>
+        </div>
+        <div class="tabpanel" role="tabpanel" id="panel-zapier" aria-labelledby="tab-zapier" tabindex="0" hidden>
+          <div class="grid-2">
+            <div class="placeholder-shot">[Screenshot of the Zap]</div>
+            <div><p class="body-text">[Step-by-step build notes for Zapier.]</p><p class="note">Guide: templates/zapier-build.md.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. TECH AND DECISIONS: stack, and 3-5 short "why this, not that" notes. -->
+      <section class="section" id="decisions" aria-labelledby="decisions-title">
+        <div class="section-header">
+          <div class="section-num">§ 07</div>
+          <div>
+            <h2 class="section-title" id="decisions-title">Tech and decisions.</h2>
+            <div class="section-desc">Why this, not that</div>
+          </div>
+        </div>
+        <div class="kv">
+          <div class="kv-row"><span class="kv-key">Runs on</span><span class="kv-val">Cloudflare Workers + D1</span></div>
+          <div class="kv-row"><span class="kv-key">AI</span><span class="kv-val">Gemini Flash, Workers AI fallback</span></div>
+          <div class="kv-row"><span class="kv-key">Messages</span><span class="kv-val">Gmail API</span></div>
+        </div>
+        <ol class="notes gap-28">
+          <li><span><strong>Workers, not hosted n8n.</strong> Recruiters click at any hour. Free n8n hosting can sleep; a Worker answers in milliseconds.</span></li>
+          <li><span><strong>D1, not Postgres.</strong> It never pauses on the free tier, so the demo works on a quiet Sunday too.</span></li>
+          <li><span><strong>[Decision.]</strong> [Why, in one sentence.]</span></li>
+        </ol>
+      </section>
+
+      <!-- 8. LINKS: code, templates, video, contact. -->
+      <section class="section" id="links" aria-labelledby="links-title">
+        <div class="section-header">
+          <div class="section-num">§ 08</div>
+          <div>
+            <h2 class="section-title" id="links-title">Links.</h2>
+            <div class="section-desc">Code · templates · video · contact</div>
+          </div>
+        </div>
+        <div class="kv">
+          <div class="kv-row"><span class="kv-key">Code</span><span class="kv-val"><a href="https://github.com/von-cas/automation-demos">github.com/von-cas/automation-demos</a></span></div>
+          <div class="kv-row"><span class="kv-key">Templates</span><span class="kv-val">[Link to this demo's templates folder]</span></div>
+          <div class="kv-row"><span class="kv-key">Video</span><span class="kv-val">[YouTube link]</span></div>
+          <div class="kv-row"><span class="kv-key">Contact</span><span class="kv-val"><a href="https://voncastro.pages.dev/#s09">Hire me for something like this</a></span></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <div class="foot">
+      <span>© 2026 Von Lawrence Castro</span>
+      <ul>
+        <li><a href="/">All demos</a></li>
+        <li><a href="https://voncastro.pages.dev/">Portfolio</a></li>
+        <li><a href="https://github.com/von-cas/automation-demos">GitHub</a></li>
+      </ul>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

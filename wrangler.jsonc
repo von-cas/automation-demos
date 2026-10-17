@@ -1,0 +1,37 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "automation-demos",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "preview_urls": false,
+  "observability": { "enabled": true },
+
+  // One cron for every job (the account has 5 in total). The dispatcher decides what is due.
+  "triggers": { "crons": ["* * * * *"] },
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "automation-demos",
+      "database_id": "1ae4d27e-b138-48c3-83dc-9b3fa2911644",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "ai": { "binding": "AI" },
+
+  // Public settings only. Secrets are set with `wrangler secret put` (names in README.md).
+  "vars": {
+    "ALLOWED_ORIGINS": "https://vondemo.pages.dev,http://localhost:8788,http://127.0.0.1:8788",
+    "GEMINI_MODEL": "gemini-3.8-flash",
+    "WORKERS_AI_MODEL": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+    "GMAIL_FROM_ADDRESS": "vibecoder866@gmail.com",
+    "GMAIL_FROM_NAME": "Von Castro - Automation Demo",
+    "DEMO_CALENDAR_ID": "primary",
+    "DEMO_TIMEZONE": "Asia/Manila",
+    "IP_DAILY_LIMIT": "3",
+    "DAILY_SEND_CAP": "60",
+    "RETENTION_DAYS": "7"
+  }
+}

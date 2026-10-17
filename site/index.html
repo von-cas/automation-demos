@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Automation Demos | Von Castro</title>
+  <meta name="description" content="Live automation demos by Von Castro: speed-to-lead, booking with reminders, and invoice to ledger, plus case studies for LiveDesk and FixLink. Every run shows on a live ops feed.">
+  <link rel="canonical" href="https://vondemo.pages.dev/">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f7f7f4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#141311" media="(prefers-color-scheme: dark)">
+  <meta name="demo-api" content="https://automation-demos.vonc.workers.dev">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Automation Demos | Von Castro">
+  <meta property="og:description" content="Live automation demos with a public ops feed: every run, step and timing.">
+  <meta property="og:url" content="https://vondemo.pages.dev/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+  <link rel="stylesheet" href="/assets/datasheet.css">
+  <script src="/assets/theme-init.js"></script>
+  <script src="/assets/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<div class="container">
+
+  <header class="masthead">
+    <div class="doc-meta">
+      <span><strong>Doc.</strong> VDM-2026-000</span>
+      <span><strong>Rev.</strong> 2026.10.18</span>
+      <span><a href="https://voncastro.pages.dev/">Portfolio</a></span>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Theme</button>
+    </div>
+    <div class="masthead-main">
+      <div class="kicker">Automation demos · Live</div>
+      <h1 class="doc-title">Automations,<br><em>running in public.</em></h1>
+      <div class="doc-subtitle">
+        <span>Cloudflare Workers · D1 · Gemini</span>
+        <span>Built by Von Castro · Zamboanga City, PH</span>
+      </div>
+      <p class="lede">
+        These are working automations, not mockups. Fill in a form and the system answers within a minute.
+        Book a slot and the reminders arrive. Send an invoice and it lands in the ledger.
+        <strong>Every run shows up below, step by step, with its timing.</strong>
+      </p>
+      <div class="actions">
+        <a class="cta primary" href="#s01">See the live feed</a>
+        <a class="cta" href="https://github.com/von-cas/automation-demos">Code on GitHub</a>
+        <a class="cta" href="https://voncastro.pages.dev/#s09">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="abstract">
+    <p>Anyone can screenshot a workflow. <em>The proof is a run log</em>: what fired, what each step did,
+      how long it took, and what happened when something broke.</p>
+  </div>
+
+  <div class="doc-body">
+    <aside class="doc-aside" aria-label="Page index">
+      <div class="index-title">Index</div>
+      <ul class="index-list">
+        <li><a href="#s01" data-num="01">Live operations</a></li>
+        <li><a href="#s02" data-num="02">Case studies</a></li>
+        <li><a href="#s03" data-num="03">Reliability</a></li>
+        <li><a href="#s04" data-num="04">Stack</a></li>
+      </ul>
+    </aside>
+
+    <main class="doc-main" id="main">
+      <section class="section" id="s01" aria-labelledby="s01-title" data-ops-feed data-limit="12">
+        <div class="section-header">
+          <div class="section-num">§ 01</div>
+          <div>
+            <h2 class="section-title" id="s01-title">Live operations.</h2>
+            <div class="section-desc">Straight from the run log · refreshes every 15 seconds</div>
+          </div>
+        </div>
+
+        <div class="params" aria-label="Live numbers">
+          <div class="param"><div class="param-key">Runs · 24 h</div><div class="param-val" data-stat="runs_24h">–</div><div class="param-unit">all demos</div></div>
+          <div class="param"><div class="param-key">Success · 7 d</div><div class="param-val" data-stat="success_rate_7d">–</div><div class="param-unit">finished runs</div></div>
+          <div class="param"><div class="param-key">Median time</div><div class="param-val" data-stat="median">–</div><div class="param-unit">to the result</div></div>
+          <div class="param"><div class="param-key">Emails today</div><div class="param-val" data-stat="emails_today">–</div><div class="param-unit">cap 60 per day</div></div>
+        </div>
+
+        <div class="feed-head">
+          <h3 class="label" id="feed-title">Latest runs</h3>
+          <span class="feed-status" data-feed-status data-state="idle" role="status"><span class="dot" aria-hidden="true"></span><span data-feed-status-text>Connecting…</span></span>
+        </div>
+        <ol class="feed" data-feed-list aria-labelledby="feed-title">
+          <li class="empty">Loading the run log…</li>
+        </ol>
+        <p class="note">Visitor details are never shown here. They are deleted after 7 days.</p>
+      </section>
+
+      <section class="section" id="s02" aria-labelledby="s02-title">
+        <div class="section-header">
+          <div class="section-num">§ 02</div>
+          <div>
+            <h2 class="section-title" id="s02-title">Case studies.</h2>
+            <div class="section-desc">Two shipped products · three live demos</div>
+          </div>
+        </div>
+        <ul class="rows">
+          <li class="row">
+            <span class="row-ref">P-01</span>
+            <div><h3 class="row-title">FixLink</h3><p class="row-text">Support agents record a fix once with a Chrome extension. Customers get a step-by-step guide link instead of a long email.</p></div>
+            <span class="row-state"><a href="https://usefixlink.com/">Live product</a> · case study soon</span>
+          </li>
+          <li class="row">
+            <span class="row-ref">P-02</span>
+            <div><h3 class="row-title">LiveDesk</h3><p class="row-text">A help desk where AI answers website chat from the knowledge base and hands off to an agent with a summary.</p></div>
+            <span class="row-state"><a href="https://livedesk.help/">Live product</a> · case study soon</span>
+          </li>
+          <li class="row">
+            <span class="row-ref">D-01</span>
+            <div><h3 class="row-title">Speed-to-Lead</h3><p class="row-text">A website lead gets scored by AI and a personal reply within 60 seconds, with follow-ups that stop when they book.</p></div>
+            <span class="row-state">In build</span>
+          </li>
+          <li class="row">
+            <span class="row-ref">D-02</span>
+            <div><h3 class="row-title">Booking + reminders</h3><p class="row-text">Pick a slot from a real calendar. The confirmation, both reminders and the no-show follow-up all send on their own.</p></div>
+            <span class="row-state">In build</span>
+          </li>
+          <li class="row">
+            <span class="row-ref">D-03</span>
+            <div><h3 class="row-title">Invoice to ledger</h3><p class="row-text">Upload or email an invoice. AI reads the fields, catches duplicates and bad totals, and posts it to the ledger.</p></div>
+            <span class="row-state">In build</span>
+          </li>
+        </ul>
+        <p class="note">Every case study follows the same layout: <a href="/case-studies/template/">see the template</a>.</p>
+      </section>
+
+      <section class="section" id="s03" aria-labelledby="s03-title">
+        <div class="section-header">
+          <div class="section-num">§ 03</div>
+          <div>
+            <h2 class="section-title" id="s03-title">Reliability.</h2>
+            <div class="section-desc">What every demo does when something fails</div>
+          </div>
+        </div>
+        <div class="kv">
+          <div class="kv-row"><span class="kv-key">AI answers</span><span class="kv-val">Checked against a schema. <strong>One retry</strong>, then a second model takes over.</span></div>
+          <div class="kv-row"><span class="kv-key">Failed steps</span><span class="kv-val">Saved to a <strong>dead-letter list</strong> and retried on a backoff, or by hand.</span></div>
+          <div class="kv-row"><span class="kv-key">Alerts</span><span class="kv-val">Every failure sends me a Telegram alert. Repeats too.</span></div>
+          <div class="kv-row"><span class="kv-key">Abuse limits</span><span class="kv-val">Turnstile on every form, 3 runs per visitor per day, and a daily email cap. Past the cap, the email shows on the page instead.</span></div>
+          <div class="kv-row"><span class="kv-key">Privacy</span><span class="kv-val">Visitor details and demo calendar events are <strong>deleted after 7 days</strong> by a nightly job.</span></div>
+        </div>
+      </section>
+
+      <section class="section" id="s04" aria-labelledby="s04-title">
+        <div class="section-header">
+          <div class="section-num">§ 04</div>
+          <div>
+            <h2 class="section-title" id="s04-title">Stack.</h2>
+            <div class="section-desc">Free tiers only · total cost $0</div>
+          </div>
+        </div>
+        <div class="kv">
+          <div class="kv-row"><span class="kv-key">Logic</span><span class="kv-val">TypeScript on Cloudflare Workers, with tests.</span></div>
+          <div class="kv-row"><span class="kv-key">Data</span><span class="kv-val">Cloudflare D1 (SQLite). One run log shared by every demo.</span></div>
+          <div class="kv-row"><span class="kv-key">AI</span><span class="kv-val">Gemini Flash, with Workers AI as the fallback.</span></div>
+          <div class="kv-row"><span class="kv-key">Email + calendar</span><span class="kv-val">Gmail API and Google Calendar API.</span></div>
+          <div class="kv-row"><span class="kv-key">Schedules</span><span class="kv-val">One cron trigger runs every job.</span></div>
+          <div class="kv-row"><span class="kv-key">Also built in</span><span class="kv-val">n8n, Make, GoHighLevel and Zapier versions of each demo, with import files.</span></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <div class="foot">
+      <span>© 2026 Von Lawrence Castro</span>
+      <ul>
+        <li><a href="https://voncastro.pages.dev/">Portfolio</a></li>
+        <li><a href="https://github.com/von-cas/automation-demos">GitHub</a></li>
+        <li><a href="/case-studies/template/">Case-study template</a></li>
+      </ul>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

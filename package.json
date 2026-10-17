@@ -1,0 +1,41 @@
+{
+  "name": "automation-demos",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Live automation demos (speed-to-lead, booking + reminders, invoice to ledger) on Cloudflare Workers + D1, with the shared core they use.",
+  "license": "MIT",
+  "author": "Von Lawrence Castro",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/von-cas/automation-demos.git"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "types": "wrangler types --include-env=false",
+    "check:site": "node scripts/check-site.mjs",
+    "check": "npm run typecheck && npm test && npm run check:site",
+    "dev": "wrangler dev",
+    "dev:site": "wrangler pages dev site --port 8788",
+    "db:migrate": "wrangler d1 migrations apply automation-demos --remote",
+    "db:migrate:local": "wrangler d1 migrations apply automation-demos --local",
+    "deploy": "wrangler deploy",
+    "deploy:site": "wrangler pages deploy site --project-name vondemo --branch main --commit-dirty=true",
+    "secrets:put": "node scripts/put-secrets.mjs",
+    "google:consent": "node scripts/google-consent.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-plugin": "^1.4.4",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.12",
+    "wrangler": "^4.151.1"
+  }
+}

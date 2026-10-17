@@ -1,0 +1,10 @@
+# Local secrets for `wrangler dev`. Copy to .dev.vars (git-ignored) and fill in. Names only here.
+GEMINI_API_KEY=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GOOGLE_REFRESH_TOKEN=
+TURNSTILE_SECRET=
+TELEGRAM_BOT_TOKEN=
+TELEGRAM_CHAT_ID=
+IP_HASH_SALT=
+ADMIN_TOKEN=

@@ -1,0 +1,14 @@
+node_modules/
+.wrangler/
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+.env
+.env.*
+*.log
+.DS_Store
+build/
+video/**/build/
+coverage/
+lighthouse/
+worker-configuration.d.ts

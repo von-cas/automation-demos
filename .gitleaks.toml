@@ -1,0 +1,4 @@
+# Default gitleaks rules. The Cloudflare D1 database id in wrangler.jsonc is not a secret
+# (it only works with the account's own API credentials).
+[extend]
+useDefault = true

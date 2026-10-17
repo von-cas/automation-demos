@@ -1,0 +1,3 @@
+#!/bin/sh
+# Secret scan of the staged changes. Enable once per clone: git config core.hooksPath .githooks
+exec gitleaks git --pre-commit --staged --redact --exit-code 1 .
