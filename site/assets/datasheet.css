@@ -402,6 +402,26 @@ h3.sub { font-family: var(--font-display); font-weight: 400; font-size: 28px; li
   font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
 }
 .video-play:hover span, .video-play:focus-visible span { background: var(--accent); }
+.video video { display: block; width: 100%; height: 100%; background: #000; }
+.video video a { color: #fff; }
+
+/* Screenshots: the link opens the full-size image. */
+.shot { display: block; border: 1px solid var(--rule); }
+.shot:hover { border-color: var(--accent); }
+.shots-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 560px; margin: 0 auto; }
+
+.transcript { max-width: 640px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.transcript summary {
+  min-height: 44px; display: flex; align-items: center; cursor: pointer;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2);
+}
+.transcript summary { list-style: none; gap: 10px; }
+.transcript summary::-webkit-details-marker { display: none; }
+.transcript summary::before { content: '+'; width: 12px; color: var(--accent); }
+.transcript[open] summary::before { content: '\2212'; }
+.transcript summary:hover { color: var(--accent); }
+.transcript p { font-size: 15px; line-height: 1.65; color: var(--ink-2); margin-bottom: 12px; }
+
 .video-pending { padding: 24px; text-align: center; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
 
 .placeholder-shot {
@@ -422,6 +442,14 @@ h3.sub { font-family: var(--font-display); font-weight: 400; font-size: 28px; li
 .flow .flow-h .node text.k { font-size: 14px; }
 .flow .edge { stroke: var(--ink-2); stroke-width: 1.4; fill: none; }
 .flow .arrow { fill: var(--ink-2); }
+/* .compact: two-line node labels. .loop: a dashed return edge with a label on a cut-out. */
+.flow.compact .flow-h .node text:not(.k) { font-size: 19px; }
+.flow.compact .flow-v .node text:not(.k) { font-size: 17px; }
+.flow.compact .flow-v .node text.k { font-size: 12px; }
+.flow .edge.loop { stroke-dasharray: 5 4; }
+.flow .loop-label rect { fill: var(--paper-tint); }
+.flow .loop-label text { fill: var(--ink-2); font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; }
+.flow .flow-v .loop-label text { font-size: 11px; }
 .flow .flow-v { display: block; max-width: 360px; margin: 0 auto; }
 .flow .flow-h { display: none; }
 @media (min-width: 760px) { .flow .flow-v { display: none; } .flow .flow-h { display: block; } }

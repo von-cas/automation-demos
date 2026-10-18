@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>FixLink Case Study | Von Castro</title>
+  <meta name="description" content="How I built FixLink: support agents record a fix once with a Chrome extension, private details are blurred in the browser, and customers follow a branded step-by-step guide link.">
+  <link rel="canonical" href="https://vondemo.pages.dev/case-studies/fixlink/">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f7f7f4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#141311" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="FixLink Case Study | Von Castro">
+  <meta property="og:description" content="Record a fix once, blur private details in the browser, send the customer a step-by-step link.">
+  <meta property="og:url" content="https://vondemo.pages.dev/case-studies/fixlink/">
+  <meta property="og:image" content="https://vondemo.pages.dev/case-studies/fixlink/media/video-poster.webp">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+  <link rel="stylesheet" href="/assets/datasheet.css">
+  <script src="/assets/theme-init.js"></script>
+  <script src="/assets/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<div class="container">
+
+  <header class="masthead">
+    <div class="doc-meta">
+      <span><a href="/"><strong>Demos</strong></a> / Case study</span>
+      <span><strong>Ref.</strong> P-01</span>
+      <span><strong>Rev.</strong> 2026.10.18</span>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Theme</button>
+    </div>
+    <div class="masthead-main">
+      <div class="kicker">Case study · FixLink</div>
+      <h1 class="doc-title">FixLink,<br><em>fix it once, send a link.</em></h1>
+      <div class="doc-subtitle">
+        <span>For support teams answering the same question every week</span>
+        <span>Next.js · Supabase · Chrome extension</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="doc-body">
+    <aside class="doc-aside" aria-label="Page index">
+      <div class="index-title">Index</div>
+      <ul class="index-list">
+        <li><a href="#outcome" data-num="01">Outcome</a></li>
+        <li><a href="#problem" data-num="02">The problem</a></li>
+        <li><a href="#watch" data-num="03">Watch · try it</a></li>
+        <li><a href="#how" data-num="04">How it works</a></li>
+        <li><a href="#reliability" data-num="05">Reliability</a></li>
+        <li><a href="#platforms" data-num="06">Your stack</a></li>
+        <li><a href="#decisions" data-num="07">Tech + decisions</a></li>
+        <li><a href="#links" data-num="08">Links</a></li>
+      </ul>
+    </aside>
+
+    <main class="doc-main" id="main">
+
+      <!-- 1. OUTCOME FIRST. FixLink is a product, not a Worker demo, so these numbers come from its tests
+           and production checks instead of the runs table. -->
+      <section class="section" id="outcome" aria-labelledby="outcome-title" data-demo="fixlink">
+        <div class="section-header">
+          <div class="section-num">§ 01</div>
+          <div>
+            <h2 class="section-title" id="outcome-title">Outcome.</h2>
+            <div class="section-desc">Measured in tests and on production</div>
+          </div>
+        </div>
+        <p class="lede"><strong>A support agent records a fix once and sends a link. The customer follows it step by step, and private details stay blurred.</strong></p>
+        <div class="params three gap-32" aria-label="FixLink numbers">
+          <div class="param"><div class="param-key">Readable emails</div><div class="param-val">0</div><div class="param-unit">in a 120-row inbox capture</div></div>
+          <div class="param"><div class="param-key">Title-edit save</div><div class="param-val">1.3<small>KB</small></div><div class="param-unit">was the whole guide, up to 4.5&nbsp;MB</div></div>
+          <div class="param"><div class="param-key">Automated tests</div><div class="param-val">44</div><div class="param-unit">32 app + 12 recorder privacy</div></div>
+        </div>
+        <p class="body-text gap-28">The old recorder stopped blurring after 80 matches, so a long inbox leaked the rest. The new one has no cap, reaches into iframes and shadow DOM, and blurs a frame it can&rsquo;t read as a whole.</p>
+        <p class="body-text">Every step is also in the page HTML. A customer gets a swipeable guide, and an AI assistant or search crawler reads the same steps from <span class="mono">agent.md</span>, <span class="mono">agent.json</span>, <span class="mono">llms.txt</span> and HowTo structured data.</p>
+      </section>
+
+      <!-- 2. THE PROBLEM -->
+      <section class="section" id="problem" aria-labelledby="problem-title">
+        <div class="section-header">
+          <div class="section-num">§ 02</div>
+          <div>
+            <h2 class="section-title" id="problem-title">The problem.</h2>
+            <div class="section-desc">Who has it · what it costs</div>
+          </div>
+        </div>
+        <p class="body-text">Support agents answer the same &ldquo;how do I&hellip;&rdquo; question every week. The usual reply is a wall of text or a screenshot pasted into chat. Customers lose their place halfway through, and the agent explains it again.</p>
+        <p class="body-text">Screenshots also leak emails, card numbers and API keys. Blurring them by hand is slow, so it gets skipped when the queue is long.</p>
+        <p class="body-text">Help-center tools exist, but they are built for documentation teams. An agent in the middle of a ticket needs something faster: show the fix once, get a clean link, and paste it into the reply.</p>
+      </section>
+
+      <!-- 3. WATCH IT and TRY IT LIVE -->
+      <section class="section" id="watch" aria-labelledby="watch-title">
+        <div class="section-header">
+          <div class="section-num">§ 03</div>
+          <div>
+            <h2 class="section-title" id="watch-title">Watch it. Try it.</h2>
+            <div class="section-desc">90 seconds · then open a real guide</div>
+          </div>
+        </div>
+        <figure class="figure">
+          <span class="figlabel">Fig. 1 · Demo video</span>
+          <div class="video">
+            <video controls playsinline preload="none" poster="media/video-poster.webp" aria-label="FixLink demo video: record a fix, publish it, share it in a ticket, and see the result">
+              <source src="https://usefixlink.com/video/fixlink-demo.mp4" type="video/mp4">
+              <track kind="captions" src="media/fixlink-demo.vtt" srclang="en" label="English" default>
+              <a href="https://usefixlink.com/video/fixlink-demo.mp4">Download the FixLink demo video (MP4, 5.4 MB)</a>
+            </video>
+          </div>
+          <figcaption>It opens on the end result: a customer taps &ldquo;Yes, solved&rdquo;. Then it shows how the guide got there. Captions on.</figcaption>
+        </figure>
+        <details class="transcript gap-24">
+          <summary>Read the transcript</summary>
+          <p>This is a fix link. The customer follows it step by step, and tells you it worked.</p>
+          <p>Hi, I&rsquo;m Von. Here&rsquo;s FixLink. I do the fix once in my own browser, and the extension records each click as a step. Private details are blurred before anything leaves the browser: emails, card numbers, keys, even inside iframes.</p>
+          <p>In the editor, I tidy the wording and reorder steps. The guide already looks like the customer&rsquo;s brand, not mine. One click publishes it. The share panel shows exactly what the customer gets. I copy a ready-made reply and paste it into the ticket. No more long text replies.</p>
+          <p>The customer gets one step at a time, with progress, on any screen. At the end, they say if it worked. Back in FixLink, I see which guides fix things, and which ones need a rewrite.</p>
+          <p>Every guide also works for AI assistants, so a customer&rsquo;s own AI can follow the same steps. Try the live example at the link below.</p>
+        </details>
+        <div class="actions gap-28">
+          <a class="cta primary" href="https://usefixlink.com/demo/reset-router-and-reconnect">Try a live guide</a>
+          <a class="cta" href="https://chromewebstore.google.com/detail/fixlink-capture/pmbkdpkmhkpjofnmhdpfficcgkpkipnn">Get the Chrome extension</a>
+        </div>
+        <p class="note">The example guide is public. No sign-up needed. Tap &ldquo;Yes, solved&rdquo; or &ldquo;Not yet&rdquo; at the end.</p>
+      </section>
+
+      <!-- 4. HOW IT WORKS -->
+      <section class="section" id="how" aria-labelledby="how-title">
+        <div class="section-header">
+          <div class="section-num">§ 04</div>
+          <div>
+            <h2 class="section-title" id="how-title">How it works.</h2>
+            <div class="section-desc">Record → blur → publish → follow → feedback</div>
+          </div>
+        </div>
+        <figure class="figure">
+          <span class="figlabel">Fig. 2 · Flow</span>
+          <div class="flow compact">
+            <svg class="flow-h" viewBox="0 0 960 214" role="img" aria-labelledby="flow-h-title">
+              <title id="flow-h-title">Flow: an agent records the fix once in the Chrome extension, private fields are blurred in the browser, the guide is published from the web editor, the customer follows it on any screen, and their "Solved" or "Not yet" answer lands on the results page. "Not yet" answers point to the guides that need a rewrite.</title>
+              <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path class="arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+              <g class="node trigger"><rect x="1" y="10" width="172" height="140" rx="2"/><text class="k" x="16" y="44">EXTENSION</text><text x="16" y="92">Agent records</text><text x="16" y="118">the fix once</text></g>
+              <path class="edge" d="M173,80 H196" marker-end="url(#ah)"/>
+              <g class="node"><rect x="197" y="10" width="172" height="140" rx="2"/><text class="k" x="212" y="44">IN BROWSER</text><text x="212" y="92">Private fields</text><text x="212" y="118">blurred</text></g>
+              <path class="edge" d="M369,80 H392" marker-end="url(#ah)"/>
+              <g class="node"><rect x="393" y="10" width="172" height="140" rx="2"/><text class="k" x="408" y="44">WEB EDITOR</text><text x="408" y="92">Guide</text><text x="408" y="118">published</text></g>
+              <path class="edge" d="M565,80 H588" marker-end="url(#ah)"/>
+              <g class="node"><rect x="589" y="10" width="172" height="140" rx="2"/><text class="k" x="604" y="44">ANY SCREEN</text><text x="604" y="92">Customer</text><text x="604" y="118">follows it</text></g>
+              <path class="edge" d="M761,80 H784" marker-end="url(#ah)"/>
+              <g class="node output"><rect x="785" y="10" width="174" height="140" rx="2"/><text class="k" x="800" y="44">RESULTS</text><text x="800" y="92">"Solved"</text><text x="800" y="118">feedback</text></g>
+              <path class="edge loop" d="M872,150 V186 H479 V151" marker-end="url(#ah)"/>
+              <g class="loop-label"><rect x="560" y="174" width="232" height="24"/><text x="676" y="191" text-anchor="middle">"NOT YET" → REWRITE</text></g>
+            </svg>
+            <svg class="flow-v" viewBox="0 0 330 580" role="img" aria-labelledby="flow-v-title">
+              <title id="flow-v-title">Flow: an agent records the fix once in the Chrome extension, private fields are blurred in the browser, the guide is published from the web editor, the customer follows it on any screen, and their "Solved" or "Not yet" answer lands on the results page. "Not yet" answers point to the guides that need a rewrite.</title>
+              <defs><marker id="av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path class="arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+              <g class="node trigger"><rect x="1" y="1" width="250" height="92" rx="2"/><text class="k" x="18" y="28">EXTENSION</text><text x="18" y="56">Agent records</text><text x="18" y="79">the fix once</text></g>
+              <path class="edge" d="M126,93 V120" marker-end="url(#av)"/>
+              <g class="node"><rect x="1" y="121" width="250" height="92" rx="2"/><text class="k" x="18" y="148">IN BROWSER</text><text x="18" y="176">Private fields</text><text x="18" y="199">blurred</text></g>
+              <path class="edge" d="M126,213 V240" marker-end="url(#av)"/>
+              <g class="node"><rect x="1" y="241" width="250" height="92" rx="2"/><text class="k" x="18" y="268">WEB EDITOR</text><text x="18" y="296">Guide</text><text x="18" y="319">published</text></g>
+              <path class="edge" d="M126,333 V360" marker-end="url(#av)"/>
+              <g class="node"><rect x="1" y="361" width="250" height="92" rx="2"/><text class="k" x="18" y="388">ANY SCREEN</text><text x="18" y="416">Customer</text><text x="18" y="439">follows it</text></g>
+              <path class="edge" d="M126,453 V480" marker-end="url(#av)"/>
+              <g class="node output"><rect x="1" y="481" width="250" height="92" rx="2"/><text class="k" x="18" y="508">RESULTS</text><text x="18" y="536">"Solved"</text><text x="18" y="559">feedback</text></g>
+              <path class="edge loop" d="M251,527 H296 V287 H252" marker-end="url(#av)"/>
+              <g class="loop-label"><rect x="262" y="392" width="64" height="40"/><text x="294" y="408" text-anchor="middle">NOT YET</text><text x="294" y="425" text-anchor="middle">REWRITE</text></g>
+            </svg>
+          </div>
+          <figcaption>Blurring happens before anything is uploaded. A &ldquo;Not yet&rdquo; answer sends the agent back to the editor.</figcaption>
+        </figure>
+        <ol class="notes gap-28">
+          <li><span><strong>Record.</strong> The extension&rsquo;s side panel records clicks and screenshots while I do the fix on my own screen. Emails, card numbers and keys are blurred in the screenshot before it leaves the browser.</span></li>
+          <li><span><strong>Review.</strong> The web editor turns the capture into steps. I fix the wording, reorder steps, mark up a screenshot or redo one step. An optional AI pass tidies the writing and checks the screenshots for anything the blur missed.</span></li>
+          <li><span><strong>Publish.</strong> The guide gets a link under the company&rsquo;s handle, in the company&rsquo;s brand color, like <span class="mono">usefixlink.com/&lt;handle&gt;/&lt;guide&gt;</span>.</span></li>
+          <li><span><strong>Share.</strong> I copy the link, or a ready-made reply that includes it. Teams can also embed a guide on their site or group guides into a searchable help collection.</span></li>
+          <li><span><strong>Learn.</strong> At the end the customer taps &ldquo;Yes, solved&rdquo; or &ldquo;Not yet&rdquo;. The results page shows which guides work and which ones need a rewrite.</span></li>
+        </ol>
+
+        <figure class="figure gap-32">
+          <span class="figlabel">Fig. 3 · Editor</span>
+          <a class="shot" href="media/editor-brand.webp"><img src="media/editor-brand.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="FixLink editor for the guide &quot;Update the card on your account&quot;. The guide title and step number are in the company's teal brand color. The Share and settings panel on the right is open on the Brand tab, with a live preview card, the brand name Northwind Billing and seven color swatches."></a>
+          <figcaption>The editor with the Brand tab open. The guide wears the company&rsquo;s teal. FixLink&rsquo;s own orange only marks FixLink buttons.</figcaption>
+        </figure>
+
+        <figure class="figure gap-32">
+          <span class="figlabel">Fig. 4 · What the customer sees</span>
+          <div class="shots-2">
+            <a class="shot" href="media/guide-cover-phone.webp"><img src="media/guide-cover-phone.webp" width="640" height="1385" loading="lazy" decoding="async" alt="The published guide on a phone: Northwind Billing's name, a Blurred badge, the title &quot;Update the card on your account&quot;, &quot;4 steps, about 2 minutes&quot;, a progress bar and step 1, Open Settings, with a screenshot."></a>
+            <a class="shot" href="media/guide-solved-phone.webp"><img src="media/guide-solved-phone.webp" width="640" height="1385" loading="lazy" decoding="async" alt="Later in the same guide on a phone: Back and Next step buttons, then a card asking &quot;Did this solve it?&quot; with the buttons &quot;Yes, solved&quot; and &quot;Not yet&quot;."></a>
+          </div>
+          <figcaption>Left: the guide opens on a phone. Right: the question at the end. The answer goes back to the support team.</figcaption>
+        </figure>
+
+        <figure class="figure gap-32">
+          <span class="figlabel">Fig. 5 · Results</span>
+          <a class="shot" href="media/results-dashboard.webp"><img src="media/results-dashboard.webp" width="1600" height="1017" loading="lazy" decoding="async" alt="FixLink home screen for Maya Reyes. A brand color picker sits above four guide cards. Two live guides show counts such as &quot;41 fixed, 3 still stuck&quot;, and two drafts say &quot;Draft, not sent yet&quot;."></a>
+          <figcaption>Each guide card shows how many customers it fixed and how many are still stuck. Screens use local demo data.</figcaption>
+        </figure>
+      </section>
+
+      <!-- 5. RELIABILITY AND PRIVACY -->
+      <section class="section" id="reliability" aria-labelledby="reliability-title">
+        <div class="section-header">
+          <div class="section-num">§ 05</div>
+          <div>
+            <h2 class="section-title" id="reliability-title">Reliability.</h2>
+            <div class="section-desc">What can fail · what happens then</div>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <caption class="sr-only">Failure modes and how FixLink handles each</caption>
+            <thead><tr><th scope="col">If this fails</th><th scope="col">What happens</th></tr></thead>
+            <tbody>
+              <tr><td>A screenshot leaks a customer&rsquo;s email or card</td><td>Blur runs in every frame and inside shadow DOM, with no match cap. A frame the extension can&rsquo;t read is blurred whole. The blur stays solid to the image edges. A real Chrome test found an edge leak, and I fixed it.</td></tr>
+              <tr><td>Two edits collide</td><td>Changes that depend on the current guide, like AI polish or a screenshot upload, run under a row lock and merge field by field. An edit saved in the meantime is kept.</td></tr>
+              <tr><td>A big guide fails to save</td><td>The web app and the extension share one size budget. Autosave sends only the screenshots that changed, and splits a save that would pass Vercel&rsquo;s 4.5&nbsp;MB request limit.</td></tr>
+              <tr><td>One company reads another&rsquo;s data</td><td>Supabase row-level security is on for every app table, and the public key&rsquo;s table grants are revoked. Every admin page checks the role before it loads data.</td></tr>
+              <tr><td>Someone fakes a Google identity</td><td>The Google account ID comes only from verified identities, never from profile fields a user can edit.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 class="sub">How it&rsquo;s tested</h3>
+        <p class="body-text">32 web and store tests run against a real Postgres database, including a concurrency test for two editors. 12 recorder privacy tests load the real extension in Chrome and check that every email in the capture is unreadable. Each security fix shipped with a test that fails on the old code.</p>
+      </section>
+
+      <!-- 6. USE IT WITH YOUR STACK. FixLink is a commercial product, so this replaces the platform-template tabs. -->
+      <section class="section" id="platforms" aria-labelledby="platforms-title">
+        <div class="section-header">
+          <div class="section-num">§ 06</div>
+          <div>
+            <h2 class="section-title" id="platforms-title">Use it with your stack.</h2>
+            <div class="section-desc">Help desk · website · AI assistants</div>
+          </div>
+        </div>
+        <div class="kv">
+          <div class="kv-row"><span class="kv-key">Help desk</span><span class="kv-val">Paste the link or the ready-made reply into any ticket: Zendesk, Intercom, Help Scout or plain email.</span></div>
+          <div class="kv-row"><span class="kv-key">Website</span><span class="kv-val">Embed a guide with one script tag, or with an iframe where the site blocks scripts.</span></div>
+          <div class="kv-row"><span class="kv-key">Help collection</span><span class="kv-val">Group guides into a searchable collection under the company&rsquo;s handle.</span></div>
+          <div class="kv-row"><span class="kv-key">AI assistants</span><span class="kv-val">Point an assistant at a collection&rsquo;s <span class="mono">llms.txt</span>, or a guide&rsquo;s <span class="mono">agent.md</span>. <a href="https://usefixlink.com/demo/reset-router-and-reconnect/agent.md">See one</a>.</span></div>
+        </div>
+      </section>
+
+      <!-- 7. TECH AND DECISIONS -->
+      <section class="section" id="decisions" aria-labelledby="decisions-title">
+        <div class="section-header">
+          <div class="section-num">§ 07</div>
+          <div>
+            <h2 class="section-title" id="decisions-title">Tech and decisions.</h2>
+            <div class="section-desc">Architecture · why this, not that</div>
+          </div>
+        </div>
+        <div class="kv">
+          <div class="kv-row"><span class="kv-key">Web app</span><span class="kv-val">Next.js 16 (App Router) on Vercel</span></div>
+          <div class="kv-row"><span class="kv-key">Data + sign-in</span><span class="kv-val">Supabase Postgres and Auth, with row-level security</span></div>
+          <div class="kv-row"><span class="kv-key">Recorder</span><span class="kv-val">Chrome extension (Manifest V3) with a side panel</span></div>
+          <div class="kv-row"><span class="kv-key">Shared code</span><span class="kv-val">One TypeScript package for capture-to-guide logic, blurring and size limits</span></div>
+          <div class="kv-row"><span class="kv-key">AI</span><span class="kv-val">An OpenAI-compatible client, on Ollama Cloud or OpenRouter</span></div>
+        </div>
+        <ol class="notes gap-28">
+          <li><span><strong>Blur in the browser, not on the server.</strong> Private text is hidden before the screenshot is uploaded, so FixLink never stores the raw image.</span></li>
+          <li><span><strong>One page for people and AI.</strong> Every step stays in the server HTML. The same guide works for a customer on a phone and for an AI assistant fetching it, with no separate copy to keep in sync.</span></li>
+          <li><span><strong>The customer&rsquo;s brand, not FixLink&rsquo;s.</strong> Guides wear the company&rsquo;s color, so the customer feels they are still with the company they asked for help.</span></li>
+          <li><span><strong>Light pages over a full brand background.</strong> I tried a full-bleed brand color and dropped it because it was tiring to read. The color now sits on the title, progress bar and main button.</span></li>
+          <li><span><strong>One size budget, checked in the build.</strong> The extension and the web app read the same limits, and a check fails the build if they drift apart.</span></li>
+        </ol>
+      </section>
+
+      <!-- 8. LINKS. Product code is private, so there is no code link. -->
+      <section class="section" id="links" aria-labelledby="links-title">
+        <div class="section-header">
+          <div class="section-num">§ 08</div>
+          <div>
+            <h2 class="section-title" id="links-title">Links.</h2>
+            <div class="section-desc">Product · example · extension · contact</div>
+          </div>
+        </div>
+        <div class="kv">
+          <div class="kv-row"><span class="kv-key">Live product</span><span class="kv-val"><a href="https://usefixlink.com/">usefixlink.com</a></span></div>
+          <div class="kv-row"><span class="kv-key">Example guide</span><span class="kv-val"><a href="https://usefixlink.com/demo/reset-router-and-reconnect">Reset your router and reconnect</a></span></div>
+          <div class="kv-row"><span class="kv-key">Extension</span><span class="kv-val"><a href="https://chromewebstore.google.com/detail/fixlink-capture/pmbkdpkmhkpjofnmhdpfficcgkpkipnn">FixLink Capture on the Chrome Web Store</a></span></div>
+          <div class="kv-row"><span class="kv-key">Video</span><span class="kv-val"><a href="#watch">The 90-second demo above</a></span></div>
+          <div class="kv-row"><span class="kv-key">Code</span><span class="kv-val">Private, because FixLink is a commercial product. This page covers the architecture, decisions and tests instead.</span></div>
+          <div class="kv-row"><span class="kv-key">Contact</span><span class="kv-val"><a href="https://voncastro.pages.dev/#s09">Hire me for something like this</a></span></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <div class="foot">
+      <span>© 2026 Von Lawrence Castro</span>
+      <ul>
+        <li><a href="/">All demos</a></li>
+        <li><a href="https://voncastro.pages.dev/">Portfolio</a></li>
+        <li><a href="https://usefixlink.com/">FixLink</a></li>
+      </ul>
+    </div>
+  </footer>
+</div>
+</body>
+</html>
