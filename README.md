@@ -63,6 +63,16 @@ Deploy pitfalls (found 2026-10-18):
 - A new cron trigger took about 10 minutes to fire for the first time (Cloudflare says up to 15).
   `last_cron_tick` in `/api/health` shows when it starts.
 
+Case-study page notes (found 2026-10-18, FixLink page):
+
+- Run the external link check as `npm run check:site -- --external`. Without the `--`, npm keeps the flag and the
+  script skips the external links.
+- A product with no Worker runs (FixLink, LiveDesk) keeps `data-demo` but drops `data-ops-feed`, so §1 shows real
+  proof points instead of an empty feed.
+- A video hosted on another site needs that origin in `media-src` in `site/_headers`. Keep the `.vtt` captions on this
+  site: a cross-origin track also needs `crossorigin` on the video and CORS on the other host.
+- Images go in as WebP. The local Homebrew ffmpeg has no WebP encoder; Pillow (`python3`, without `-I`) has one.
+
 ### Configuration (names only, never values)
 
 Public settings live in `wrangler.jsonc` under `vars`. Secrets are set on the Worker with `wrangler secret put`,
